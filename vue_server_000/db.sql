@@ -38,6 +38,46 @@ CREATE TABLE xz_cart(
   uid    INT
 );
 
+use xz;
+DROP TABLE IF EXISTS lg_pro;
+CREATE TABLE lg_pro(
+  lid    INT(11) PRIMARY KEY AUTO_INCREMENT,
+  lname  VARCHAR(128), 
+  price  DECIMAL(10,2),
+  img_url VARCHAR(255),
+  details VARCHAR(1024)
+);
+INSERT INTO lg_pro VALUES(null,"LG冰箱GR-M2471PSF",'12999',"img/1.PNG",null); 
+INSERT INTO lg_pro VALUES(null,"LG洗衣机WDFH457CO",'8848',"img/2.PNG",null); 
+INSERT INTO lg_pro VALUES(null,"LG冰箱GR-K40PNVQ",'8848',"img/3.PNG"); 
+INSERT INTO lg_pro VALUES(null,"LG冰箱F448MC12B",'8848',"img/4.PNG"); 
+INSERT INTO lg_pro VALUES(null,"LG电视OLED55E9P",'8848',"img/5.PNG"); 
+INSERT INTO lg_pro VALUES(null,"LG电视OLED65W9PCA",'8848',"img/6.PNG");
+INSERT INTO lg_pro VALUES(null,"LG洗衣机FS10TG4",'8848',"img/7.PNG");
+INSERT INTO lg_pro VALUES(null,"LG电视OLED65E9P",'8848',"img/8.PNG");
+INSERT INTO lg_pro VALUES(null,"LG电视OLED77W9PCA",'8848',"img/9.PNG");
+INSERT INTO lg_pro VALUES(null,"LG电视75SM9000",'8848',"img/10.PNG");
+INSERT INTO lg_pro VALUES(null,"LG电视55SM8100",'6656',"img/11.PNG");
+INSERT INTO lg_pro VALUES(null,"LG电视55UM7600PCA",'6656',"img/12.PNG");
+INSERT INTO lg_pro VALUES(null,"LG滚筒洗衣机",'6856',"img/13.PNG");
+INSERT INTO lg_pro VALUES(null,"LG滚筒洗衣机WD",'12456',"img/14.PNG");
+INSERT INTO lg_pro VALUES(null,"LG滚筒洗衣机DHZ",'9856',"img/15.PNG");
+INSERT INTO lg_pro VALUES(null,"LG洗衣机WD-VH451D7S",'6656',"img/16.PNG");
+INSERT INTO lg_pro VALUES(null,"LG美容仪LGBLJ",'6656',"img/17.PNG");
+INSERT INTO lg_pro VALUES(null,"LG吸尘器A958KA",'8899',"img/18.PNG");
+INSERT INTO lg_pro VALUES(null,"LG吸尘器A958SA",'6656',"img/19.PNG");
+INSERT INTO lg_pro VALUES(null,"LG衣物护理机S3RF",'6656',"img/20.PNG");
+
+use xz;
+DROP TABLE IF EXISTS lg_cart;
+CREATE TABLE lg_cart(
+  id     INT PRIMARY KEY AUTO_INCREMENT,
+  lid    INT,
+  price  DECIMAL(10,2),
+  count  INT,
+  lname  VARCHAR(255),
+  uid    INT
+);
 
 
 
