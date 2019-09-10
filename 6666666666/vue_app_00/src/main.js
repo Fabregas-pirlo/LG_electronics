@@ -4,6 +4,9 @@ import router from './router'
 
 import MintUI from "mint-ui"
 import'mint-ui/lib/style.css'
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import 'swiper/dist/css/swiper.css'
+// Vue.use(VueAwesomeSwiper)
 
 Vue.use(MintUI)
 //1.4挑组件用
@@ -29,6 +32,9 @@ var store=new Vuex.Store({
     increment(state){
       state.cartCount++;
     },
+    clear(state){
+      state.cartCount=0;
+    }
   },
   getters:{
     getCartCount(state){

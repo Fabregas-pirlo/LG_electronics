@@ -61,6 +61,7 @@ export default {
         } else if (res.data.code == -2) {
           this.$toast("添加失败");
         } else {
+          this.$store.commit("increment");
           this.$toast("添加成功");
         }
       });
@@ -87,7 +88,7 @@ export default {
   box-sizing: border-box; /*重新计算元素宽度*/
   display: flex;
   flex-direction: column; /*商品内容按列排放*/
-  min-height: 249px; /*高度*/
+  min-height: 229px; /*高度*/
 }
 /*3:修饰当前商品中图片 10:18*/
 .goods-item img {

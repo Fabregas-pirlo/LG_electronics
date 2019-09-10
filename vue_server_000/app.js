@@ -13,7 +13,7 @@ var pool = mysql.createPool({
    password:"",
    port:3306,
    connectionLimit:20,
-   database:"xz"
+   database:"lg"
 })
 
 //4:创建web服务器监听 8080 端口
@@ -51,7 +51,7 @@ server.get("/login",(req,res)=>{
   var p = req.query.upwd;
 
   //6.2:创建sql
-  var sql = "SELECT id FROM xz_login";
+  var sql = "SELECT id FROM lg_login";
   sql+=" WHERE uname = ? AND upwd = md5(?)";
   //6.3:执行sql语句并且获取返回结果
   pool.query(sql,[u,p],(err,result)=>{
@@ -84,12 +84,12 @@ server.get("/product",(req,res)=>{
  var pno = req.query.pno;
  var ps  = req.query.pageSize;
  //3:如果客户没有请示数据设置默认数据
- //  pno=1     pageSize=4
+ //  pno=1     pageSize=6
  if(!pno){
    pno = 1;
  }
  if(!ps){
-   ps = 4;
+   ps = 6;
  }
  //4:创建sql语句
  var sql = "SELECT lid,lname,price,img_url";
@@ -108,8 +108,9 @@ server.get("/product",(req,res)=>{
 //新添加产品页跳至详情页路由
 server.get("/detail",(req,res)=>{
 	let lid = req.query.lid;
-	var sql ="SELECT lid,lname,price,img_url";
-	sql+=" FROM lg_pro  WHERE lid=?";
+//	var sql ="SELECT lid,lname,price,img_url,details1,details2";
+//	sql+=" FROM lg_pro  WHERE lid=?";
+    var sql = "select * from lg_pro Where lid = ?"
 	pool.query(sql,[lid],(err,result)=>{
 		if(err)throw err;
 		res.send({code:1,msg:"查询成功",data:result});
@@ -163,7 +164,7 @@ pool.query(sql,[uid,lid],(err,result)=>{
   if(result.length==0){
    var sql = `INSERT INTO lg_cart VALUES(null,${lid},${price},1,'${lname}',${uid})`;
   }else{
-   var sql = `UPDATE lg_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
+   var sql =`UPDATE lg_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
   }
   //7:执行sql获取返回结果
   pool.query(sql,(err,result)=>{
@@ -217,6 +218,28 @@ server.get("/delItem",(req,res)=>{
  var sql = "DELETE FROM lg_cart WHERE id=?";
  //3: 执行sql语句
  pool.query(sql,[id],(err,result)=>{
+    if(err)throw err;
+    //4: 获取服务器获取结果判断删除是否成功
+    if(result.affectedRows>0){
+      res.send({code:1,msg:"删除成功"});
+    }else{
+      res.send({code:-1,msg:"删除失败"});
+    }
+ })
+})
+
+server.get("/delAll",(req,res)=>{
+ //0:判断是否登录
+ var uid = req.session.uid;
+ console.log(uid)
+ if(!uid){
+    res.send({code:-2,msg:"请登录"});
+    return;
+ } 
+ //2: 创建sql语句
+ var sql = "DELETE FROM lg_cart";
+ //3: 执行sql语句
+ pool.query(sql,(err,result)=>{
     if(err)throw err;
     //4: 获取服务器获取结果判断删除是否成功
     if(result.affectedRows>0){

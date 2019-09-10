@@ -79,9 +79,7 @@
       </mt-tab-container-item>
 
       <mt-tab-container-item id="center">
-        <center
-        
-        ></center>
+        <center></center>
       </mt-tab-container-item>
     </mt-tab-container>
 

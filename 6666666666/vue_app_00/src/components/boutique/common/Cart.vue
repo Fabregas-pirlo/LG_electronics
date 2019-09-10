@@ -23,8 +23,10 @@
         <!-- 3.购物车中商品数量，删除选中商品，清空购物车 -->
         <div>
             <mt-button @click="delItems">删除选中商品</mt-button>
+            购物车商品数量：
+            <span style="color:red">{{$store.getters.getCartCount}}</span>
             总价：<span style="color:red">￥{{total.toFixed(2)}}</span>
-            <mt-button>清空购物车</mt-button>
+            <mt-button @click="delAll">清空购物车</mt-button>
         </div>
         <router-link to="/home" class="tocart">返回首页</router-link>
     </div>
@@ -35,7 +37,8 @@
 export default {
     data(){
         return{
-            list:[]
+            list:[],
+            count:0
         }
     },
     created(){
@@ -43,6 +46,23 @@ export default {
     },
     
     methods:{
+        delAll(){
+             this.$messagebox.confirm("是否删除商品")
+            .then(res=>{
+                // 同意
+                // 发送ajax服务器端程序
+                var url="delAll";
+                
+                this.axios.get(url).then(res=>{
+                    if(res.data.code>0){
+                        this.$toast("删除成功");
+                        // 返回服务器返回内容
+                        //重新调用loadMore最新购物列表查询
+                        this.loadMore();
+                    }
+                })   
+            }).catch(err=>{});
+        },
         handler(e){
             var i=e.target.dataset.i;
             this.list[i].count+=parseInt(e.target.dataset.n);
@@ -58,10 +78,11 @@ export default {
                     });
                 }else{
                     var rows=res.data.data;
+                    this.$store.commit("clear");
                     console.log(rows);
                     for(var item of rows){
                         item.cb=false;
-                        //this.$store.commit("increment")
+                        this.$store.commit("increment")
                     }
                     this.list=rows;
                 }
@@ -102,7 +123,7 @@ export default {
                     this.$toast("请选择需要删除的商品");
                     return;
                 }
-                url="delItems";
+                var url="delItems";
                 var ids={ids:str};
                 this.axios.get(url,{params:ids})
                 .then(res=>{
@@ -117,10 +138,20 @@ export default {
         },
         
     },
+    mounted() {
+        this.count = this.$store.getters.getCartCount;
+        console.log(this.count);
+        
+    },
     computed:{
         total(){
             return this.list.filter(item=>item.cb)
             .reduce((prev,item)=>prev+item.price*item.count,0)
+        }
+    },
+    watch:{
+        count(){
+            this.loadMore();
         }
     }
 }
@@ -152,7 +183,7 @@ export default {
 }
 .counter{
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 .tocart{
     width:80px;

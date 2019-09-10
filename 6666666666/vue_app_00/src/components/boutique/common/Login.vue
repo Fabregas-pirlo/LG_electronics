@@ -2,7 +2,35 @@
     <div>
         <mt-field label="用户名" placeholder="请输入用户名" v-model="uname"></mt-field>
         <mt-field label="密码" placeholder="请输入密码" v-model="upwd"></mt-field>
-        <mt-button size="large" @click="login">登录</mt-button>
+        <div>
+            验证码<input type="text" class="msg">
+            <button :class="{disabled:timer!=10}" @click="start">
+            {{timer==10?"获取验证码":`${timer}s后可重新获取`}}</button>
+        </div>
+        
+        <mt-button size="large" @click="login" class="login">登录</mt-button>
+
+        <div class="forget">
+			<router-link to="#" class="hola">忘记密码</router-link>
+			<router-link to="#" class="hola">新用户注册</router-link>
+		</div>
+				
+                <div>
+					<p class="other">其他登陆方式</p>
+					<div>
+						<div>
+							<div></div>
+							<span>微信登录</span>
+						</div>
+						<div>
+							<div></div>
+							<span>QQ登录</span>
+						</div>
+					</div>
+					<span>登录即代表您同意隐私政策</span>
+
+				</div>
+        
     </div>
 </template>
 
@@ -11,10 +39,24 @@ export default {
     data(){
         return{
             uname:"",
-            upwd:""
+            upwd:"",
+            timer:10
         }
     },
     methods:{
+        start(){
+			if(this.timer==10){
+				this.timer=9;
+					var n = setInterval(()=>{
+						if(this.timer>0){
+						this.timer--;
+						}else{
+							this.timer=10;
+							clearInterval(n);
+							}
+						},1000)
+					}
+				},
         login(){
             var u=this.uname;
             var p=this.upwd;
@@ -42,3 +84,33 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    button{
+		padding:2px 2px;
+		border:1px solid #aaa;
+		text-decoration:none;
+	}
+	button.disabled{
+		background:#aaa;
+		color:#555;
+	}
+    .msg{
+        border:none;
+    }
+    .login{
+        margin-top:10px;
+    }
+    .forget{
+        margin-top:20px;
+        display: flex;
+        justify-content: space-around;
+        text-decoration:none;
+    }
+    .forget .hola{
+        text-decoration:none;
+    }
+    .other{
+        text-align: center;
+    }
+</style>
