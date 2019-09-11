@@ -5,7 +5,6 @@
         <div class="chaos">
           <!-- 搜索框 -->
           <div class="top">
-           
             <div class="search">
               <input type="text" placeholder="请输入搜索内容">
             </div>
@@ -198,20 +197,27 @@ export default {
 
 <style scoped>
   .chaos{
-    background:coral;
+    background:rgb(240, 98, 58);
     width:100%;
     height:200px;
     border:1px solid #ddd;
   }
+  .top{
+    width:100%;
+    background:  rgb(226, 86, 61);
+    opacity: 0.6;
+    }
   .logo{
+    width:100%;
     position:relative;
   }
   .lg{
-    background: url(../../assets/lg02.png) no-repeat coral;
-    background-size: 80%;
+    background: url(../../assets/lg02.png) no-repeat;
+    border-radius:50%;
+    background-size: 100%;
     float: left;
-    width: 160px;
-    height:160px;
+    width: 130px;
+    height:130px;
     position: absolute;
     left:120px;
   }
@@ -219,7 +225,7 @@ export default {
     position: absolute;
     top:140px;
     left:100px;
-    font-weight:bold;
+    font-weight:normal;
     color:#fff;
   }
   /* .top{

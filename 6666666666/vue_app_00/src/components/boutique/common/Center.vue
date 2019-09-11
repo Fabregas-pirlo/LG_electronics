@@ -2,8 +2,8 @@
     <div>
         <div class="crown">
             <div class="icon">
-                <img src="../../../assets/ic_me_normal.png">
-                <p>匿名用户</p>
+                <img src="../../../assets/noname.png">
+                
             </div>
             <router-link to="/" ><div class="customer"></div></router-link>
         </div>
@@ -53,6 +53,7 @@ export default {
 </script>
 
 <style scoped>
+    
     .crown{
         width:200px;
         display: flex;
@@ -63,7 +64,7 @@ export default {
         background-size:5%; 
         width:40px;
         height: 40px;
-        border: 1px solid #000;
+        
         float: right;
     }
     .icon{
@@ -72,14 +73,14 @@ export default {
     .crown{
         width:400px;
         height:85px;
-        border:1px solid #000;
+        
     }
     .jifen{
         display:flex;
         justify-content: space-around;
          width:360px;
         height:85px;
-        border:1px solid #000;
+        /* border:1px solid #000; */
     }
     .jifen>div{
         text-align: center
@@ -87,12 +88,12 @@ export default {
     .order{
          width:400px;
         height:60px;
-        border:1px solid #000;
+        /* border:1px solid #000; */
     }
     .delivery{
             width:370px;
             height:115px;
-            border:1px solid #000;
+            /* border:1px solid #000; */
             margin: 0 auto;
     }
     .delivery ul{
@@ -121,7 +122,7 @@ export default {
         background-size:95%; 
         width:370px;
         height: 40px;
-        border:1px solid #000;
+        /* border:1px solid #000; */
     }
     .addman{
        float:left;
@@ -129,7 +130,7 @@ export default {
         background-size:95%; 
         width:370px;
         height: 40px;
-        border:1px solid #000; 
+        /* border:1px solid #000;  */
     }
     .allorders{
         float:left;
@@ -137,6 +138,6 @@ export default {
         background-size:95%; 
         width:370px;
         height: 40px;
-        border:1px solid #000; 
+        /* border:1px solid #000;  */
     }
 </style>

@@ -14,8 +14,8 @@
                 <div class="price">￥{{(item.price*item.count).toFixed(2)}}</div>
             </div>
             <div @click="handler" class="counter">
-                <button :data-i="index" data-n="-1" :disabled="item.count==0">-</button>{{item.count}}
-                <button :data-i="index" data-n="+1">+</button>
+                <button :data-i="index" data-n="-1" :disabled="item.count==0" class="decrease">-</button>{{item.count}}
+                <button :data-i="index" data-n="+1" class="increase">+</button>
             </div>
             
             <mt-button @click="delItem" :data-id="item.id">删除</mt-button>
@@ -69,7 +69,6 @@ export default {
                 // 同意
                 // 发送ajax服务器端程序
                 var url="delAll";
-                
                 this.axios.get(url).then(res=>{
                     if(res.data.code>0){
                         this.$toast("删除成功");
@@ -99,6 +98,7 @@ export default {
                     console.log(rows);
                     for(var item of rows){
                         item.cb=false;
+                        
                         this.$store.commit("increment")
                     }
                     this.list=rows;

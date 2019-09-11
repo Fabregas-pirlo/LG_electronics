@@ -5,6 +5,7 @@
     <div><router-link to="/home" class="gohome"></router-link></div>
     <div v-text="dataObj.lname" class="lname"></div>
     <span class="price">￥{{dataObj.price.toFixed(2)}}</span>
+    <!-- <img src="../../../assets/1329337423.jpg" style="background-color:#000"> -->
 
     
     
@@ -109,7 +110,8 @@ export default {
   margin:5px 10px;
   color:red;
 }
-.comments{display: block;width:340px;}
+.comments{display: block;
+          width:340px;}
 /* .temp{display: block;width:340px;} */
 .comments span{
   padding:2px;
