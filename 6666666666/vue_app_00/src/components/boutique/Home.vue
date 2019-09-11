@@ -100,11 +100,16 @@
       </mt-tab-item>
 
       <mt-tab-item id="cart" @click.native="changeState(2)" >
-        <tabbaricon
+        
+        <div class="ciao">
+          <div class="shrinkCart">{{$store.getters.getCartCount}}</div>
+          <tabbaricon
           :selectedImage="require('../../assets/cart_selected.png')"
           :normalImage="require('../../assets/cart_normal.png')"
           :focused="currentIndex[2].isSelect"
-        ></tabbaricon>购物车
+          ></tabbaricon>购物车
+        </div>
+        
       </mt-tab-item>
 
       <mt-tab-item id="center" @click.native="changeState(3)">
@@ -196,6 +201,20 @@ export default {
 </script>
 
 <style scoped>
+  .ciao{
+    position: relative;
+  }
+  .shrinkCart{
+    position: absolute;
+    width:14px;
+    height:14px;
+    border:1px solid red;
+    color:red;
+    border-radius: 50%;
+    top:-2px;
+    left:57px;
+    
+  } 
   .chaos{
     background:rgb(240, 98, 58);
     width:100%;
@@ -228,11 +247,7 @@ export default {
     font-weight:normal;
     color:#fff;
   }
-  /* .top{
-    display: flex;
-    justify-content: space-between;
-  } */
- 
+  
   .search>input{
     position:relative;
     margin: 0 auto;

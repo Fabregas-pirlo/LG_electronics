@@ -5,7 +5,7 @@
                 <img src="../../../assets/noname.png">
                 
             </div>
-            <router-link to="/" ><div class="customer"></div></router-link>
+            <router-link to="/" class="customer">22222222222</router-link>
         </div>
         <div class="jifen">
             <div>
@@ -60,8 +60,8 @@ export default {
         justify-content: space-between; 
     }
     .customer{
-        background: url(../../../assets/normalcustomer.png) ;
-        background-size:5%; 
+        background: url(../../../assets/normalcustomer.png);
+        background-size:100%; 
         width:40px;
         height: 40px;
         

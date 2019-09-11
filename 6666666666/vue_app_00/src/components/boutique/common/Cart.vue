@@ -15,10 +15,10 @@
             </div>
             <div @click="handler" class="counter">
                 <button :data-i="index" data-n="-1" :disabled="item.count==0" class="decrease">-</button>{{item.count}}
-                <button :data-i="index" data-n="+1" class="increase">+</button>
+                <button :data-i="index" data-n="1" class="increase">+</button>
             </div>
             
-            <mt-button @click="delItem" :data-id="item.id">删除</mt-button>
+            <mt-button @click="delItem" :data-id="item.id" >删除</mt-button>
         </div>
         <!-- 3.购物车中商品数量，删除选中商品，清空购物车 -->
         <div>
@@ -82,6 +82,12 @@ export default {
         handler(e){
             var i=e.target.dataset.i;
             this.list[i].count+=parseInt(e.target.dataset.n);
+            if(e.target.dataset.n=='1') {
+                this.$store.commit('increment');
+            }else{
+                this.$store.commit('reduce');
+            }
+
         },
         loadMore(){
             var url="carts";
@@ -94,12 +100,12 @@ export default {
                     });
                 }else{
                     var rows=res.data.data;
-                    this.$store.commit("clear");
+                    // this.$store.commit("clear");
                     console.log(rows);
                     for(var item of rows){
                         item.cb=false;
                         
-                        this.$store.commit("increment")
+                        // this.$store.commit("increment")
                     }
                     this.list=rows;
                 }
