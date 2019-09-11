@@ -89,7 +89,7 @@ server.get("/product",(req,res)=>{
    pno = 1;
  }
  if(!ps){
-   ps = 6;
+   ps = 10;
  }
  //4:创建sql语句
  var sql = "SELECT lid,lname,price,img_url";

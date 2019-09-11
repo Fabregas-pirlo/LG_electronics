@@ -75,7 +75,7 @@
       </mt-tab-container-item>
 
       <mt-tab-container-item id="cart">
-        <cart></cart>
+        <cart :goToCart="goToCart"></cart>
       </mt-tab-container-item>
 
       <mt-tab-container-item id="center">
@@ -100,7 +100,7 @@
         ></tabbaricon>全部商品
       </mt-tab-item>
 
-      <mt-tab-item id="cart" @click.native="changeState(2)">
+      <mt-tab-item id="cart" @click.native="changeState(2)" >
         <tabbaricon
           :selectedImage="require('../../assets/cart_selected.png')"
           :normalImage="require('../../assets/cart_normal.png')"
@@ -143,6 +143,7 @@ export default {
       p4:{price:0,href:""},
       p5:{price:0,href:""},
       p6:{price:0,href:""},
+      goToCart:false
     };
   },
   created(){
@@ -168,6 +169,11 @@ export default {
     detail:Detail,
   },
   methods: {
+    // 跳转到购物车需要刷新状态
+    // freshCart(){
+    //   if()
+    //   this.goToCart = true;
+    // },
     changeState(n) {
       for (var i = 0; i < this.currentIndex.length; i++) {
         if (n == i) {
@@ -175,6 +181,15 @@ export default {
         } else {
           this.currentIndex[i].isSelect = false;
         }
+      }
+    }
+  },
+  watch: {
+    active() {
+      if(this.active=='cart') {
+        this.goToCart = true;
+      }else {
+        this.goToCart = false;
       }
     }
   }

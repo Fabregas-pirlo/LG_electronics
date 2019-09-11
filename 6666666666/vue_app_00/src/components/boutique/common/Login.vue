@@ -17,17 +17,17 @@
 				
                 <div>
 					<p class="other">其他登陆方式</p>
-					<div>
+					<div class="ali">
 						<div>
-							<div></div>
-							<span>微信登录</span>
+							<div><img src="../../../assets/alipay.png"></div>
+							<span>支付宝登录</span>
 						</div>
 						<div>
-							<div></div>
-							<span>QQ登录</span>
+							<div><img src="../../../assets/tblogo.png" class="tb"></div>
+							<span>淘宝登录</span>
 						</div>
 					</div>
-					<span>登录即代表您同意隐私政策</span>
+					<p class="privacy">登录即代表您同意隐私政策</p>
 
 				</div>
         
@@ -97,9 +97,18 @@ export default {
 	}
     .msg{
         border:none;
+        margin-top:10px;
     }
     .login{
-        margin-top:10px;
+        margin-top:15px;
+    }
+    .ali{
+        display:flex;
+        justify-content: space-around;
+    }
+    .tb{
+        width:72px;
+        height:72px;
     }
     .forget{
         margin-top:20px;
@@ -111,6 +120,12 @@ export default {
         text-decoration:none;
     }
     .other{
+        margin-top:100px;
         text-align: center;
+    }
+    .privacy{
+        display: left;
+        text-align: center;
+        margin-top: 20px;
     }
 </style>

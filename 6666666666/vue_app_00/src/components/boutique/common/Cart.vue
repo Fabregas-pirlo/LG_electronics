@@ -3,7 +3,7 @@
         <!-- 1顶部复选框，全选 -->
         <div class="selectAll">
             <!-- 1.顶部按钮：全选 -->
-            全选<input type="checkbox">
+            全选<input type="checkbox" @click="handleChecked()" v-model="allChecked">
         </div>
         <!-- 2.购物车商品信息 -->
         <div class="cart-item" v-for="(item,index) of list" :key="index">
@@ -38,14 +38,31 @@ export default {
     data(){
         return{
             list:[],
-            count:0
+            count:0,
+            allChecked:false
         }
     },
+    props:['goToCart'],
     created(){
         this.loadMore();
     },
     
     methods:{
+        //全选功能
+        handleChecked(item){
+            if(this.allChecked==false){
+                for(var i=0;i<this.list.length;i++){
+                    var item=this.list[i];
+                    item.cb=true;
+                }
+            }else{
+                for(var i=0;i<this.list.length;i++){
+                    var item=this.list[i];
+                    item.cb=false;
+                }
+            }
+            this.allChecked = !this.allChecked;
+        },
         delAll(){
              this.$messagebox.confirm("是否删除商品")
             .then(res=>{
@@ -138,11 +155,7 @@ export default {
         },
         
     },
-    mounted() {
-        this.count = this.$store.getters.getCartCount;
-        console.log(this.count);
-        
-    },
+   
     computed:{
         total(){
             return this.list.filter(item=>item.cb)
@@ -150,10 +163,11 @@ export default {
         }
     },
     watch:{
-        count(){
+        goToCart() {
             this.loadMore();
         }
-    }
+    },
+    
 }
 </script>
 
