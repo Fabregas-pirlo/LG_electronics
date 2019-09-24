@@ -2,10 +2,10 @@
     <div>
         <div class="crown">
             <div class="icon">
-                <img src="../../../assets/noname.png">
+                <img src="../../../assets/me3.png">
                 
             </div>
-            <router-link to="/" class="customer">22222222222</router-link>
+            <p class="asyn">匿名用户</p>
         </div>
         <div class="jifen">
             <div>
@@ -53,22 +53,25 @@ export default {
 </script>
 
 <style scoped>
-    
+    .crown .asyn{
+        position: absolute;
+        
+        top:71px;
+        left:60px;
+    }
     .crown{
         width:200px;
         display: flex;
-        justify-content: space-between; 
+        justify-content: space-between;
+        margin-bottom:25px; 
     }
-    .customer{
-        background: url(../../../assets/normalcustomer.png);
-        background-size:100%; 
-        width:40px;
-        height: 40px;
-        
-        float: right;
-    }
+    
     .icon{
-        display: flex;
+        position: absolute;
+        width:54px;
+        height: 54px;
+        top:20px;
+        left:60px;
     }
     .crown{
         width:400px;
@@ -78,7 +81,7 @@ export default {
     .jifen{
         display:flex;
         justify-content: space-around;
-         width:360px;
+        width:360px;
         height:85px;
         /* border:1px solid #000; */
     }
@@ -88,16 +91,16 @@ export default {
     .order{
          width:400px;
         height:60px;
-        /* border:1px solid #000; */
+        /* border:1px solid gray;  */
     }
     .delivery{
-            width:370px;
+            width:100%;
             height:115px;
-            /* border:1px solid #000; */
+            /* border:1px solid gray;  */
             margin: 0 auto;
     }
     .delivery ul{
-            width:300px;
+            width:100%;
             list-style:none;
             display:flex;
             justify-content: space-around;
@@ -106,6 +109,7 @@ export default {
     .delivery ul>li{
         width:65px;
         height:80px;
+        text-align: center;
     }
     .delivery ul>li>a>img{
         width:49px;

@@ -9,7 +9,10 @@ import 'swiper/dist/css/swiper.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.use(VueAwesomeSwiper)
+import Vant from 'vant';
+import 'vant/lib/index.css';
 
+Vue.use(Vant);
 Vue.use(MintUI)
 //1.4挑组件用
 import "./font/iconfont.css"
@@ -29,25 +32,32 @@ Vue.use(Vuex)
 var store=new Vuex.Store({
   state:{
     cartCount:0,
+    active:''
   },
   mutations:{
+    toall(state){
+      state.active=all
+    },
+    
     increment(state){
       state.cartCount++;
     },
     clear(state){
       state.cartCount=0;
     },
-    reduce(state){
-      state.cartCount--;
+    reduce(state,n=1){
+      state.cartCount-=n;
     },
-    delItem(state){
-      state.cartCount
-    }
+    // delItem(state,n) {
+    //   state.cartCount -= n;
+    // }
   },
   getters:{
     getCartCount(state){
       return state.cartCount;
     },
+    
+    
   },
   actions:{}
 })

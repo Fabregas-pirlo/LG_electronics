@@ -18,11 +18,11 @@
                 <button :data-i="index" data-n="1" class="increase">+</button>
             </div>
             
-            <mt-button @click="delItem" :data-id="item.id" >删除</mt-button>
+            <mt-button @click="delItem($event,index)" :data-id="item.id">删除</mt-button>
         </div>
         <!-- 3.购物车中商品数量，删除选中商品，清空购物车 -->
         <div>
-            <mt-button @click="delItems">删除选中商品</mt-button>
+            <mt-button @click="delItems()">删除选中商品</mt-button>
             购物车商品数量：
             <span style="color:red">{{$store.getters.getCartCount}}</span>
             总价：<span style="color:red">￥{{total.toFixed(2)}}</span>
@@ -72,6 +72,7 @@ export default {
                 this.axios.get(url).then(res=>{
                     if(res.data.code>0){
                         this.$toast("删除成功");
+                        this.$store.commit('clear');
                         // 返回服务器返回内容
                         //重新调用loadMore最新购物列表查询
                         this.loadMore();
@@ -100,18 +101,16 @@ export default {
                     });
                 }else{
                     var rows=res.data.data;
-                    // this.$store.commit("clear");
                     console.log(rows);
                     for(var item of rows){
                         item.cb=false;
-                        
-                        // this.$store.commit("increment")
                     }
                     this.list=rows;
                 }
             })
         },
-        delItem(e){
+
+        delItem(e,i){
             // 功能：删除购物车中指定商品
             // 获取购物车id
             var id=e.target.dataset.id;
@@ -127,20 +126,28 @@ export default {
                         this.$toast("删除成功");
                         // 返回服务器返回内容
                         //重新调用loadMore最新购物列表查询
+                        var n = this.list[i].count;
+                        
+                        this.$store.commit('reduce',n);
                         this.loadMore();
                     }
                 })   
             }).catch(err=>{});
         },
+    
         delItems(){
             this.$messagebox.confirm("是否删除商品?")
             .then(res=>{
+                // var n=0;
                 var str="";
-                for(var item of this.list){
+                for(var item of this.list){ 
                     if(item.cb){
                         str+=item.id+","
+                        // n+=item.count;
+                        // return n;
                     }
                 }
+                //console.log(n);
                 str=str.substring(0,str.length-1);
                 if(str==""){
                     this.$toast("请选择需要删除的商品");
@@ -154,6 +161,7 @@ export default {
                         this.$toast("删除失败");
                     }else{
                         this.$toast("删除成功");
+                        // this.$store.commit('reduce',n);
                         this.loadMore();
                     }
                 })

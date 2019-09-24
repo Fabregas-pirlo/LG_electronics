@@ -63,6 +63,7 @@ server.get("/login",(req,res)=>{
    }else{
      //获取当前登录用户id
      //result=[{id:2}]
+     console.log(result[0]);
      var id = result[0].id;
      //将用户id保存session对象中
      //uid当前登录：用户凭证

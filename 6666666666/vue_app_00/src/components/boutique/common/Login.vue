@@ -1,8 +1,8 @@
 <template>
     <div>
-        <mt-field label="用户名" placeholder="请输入用户名" v-model="uname"></mt-field>
-        <mt-field label="密码" placeholder="请输入密码" v-model="upwd"></mt-field>
-        <div>
+        <mt-field label="用户名" placeholder="请输入用户名" v-model="uname" class="uname"></mt-field>
+        <mt-field label="密码" placeholder="请输入密码" v-model="upwd" class="upwd"></mt-field>
+        <div class="vali">
             验证码<input type="text" class="msg">
             <button :class="{disabled:timer!=10}" @click="start">
             {{timer==10?"获取验证码":`${timer}s后可重新获取`}}</button>
@@ -28,6 +28,8 @@
 						</div>
 					</div>
 					<p class="privacy">登录即代表您同意隐私政策</p>
+
+                    
 
 				</div>
         
@@ -95,12 +97,20 @@ export default {
 		background:#aaa;
 		color:#555;
 	}
+    .vali{margin-left:30px;}
+    .uname{margin-left:24px;}
+    .upwd{margin-left:24px;}
     .msg{
         border:none;
         margin-top:10px;
+        
     }
     .login{
         margin-top:15px;
+        border-radius:30px;
+        width:320px;
+        margin-left:24px;
+        background:orange;
     }
     .ali{
         display:flex;

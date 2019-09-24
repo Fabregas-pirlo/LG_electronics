@@ -1,15 +1,15 @@
 <template>
   <div class="boss">
-    <!-- <img src="../../../assets/1.png"> -->
-    <img class="img01" :src="'http://127.0.0.1:8080/'+dataObj.img_url" >
+    <van-swipe :autoplay="3000" indicator-color="white">
+      <van-swipe-item><img class="img01" :src="'http://127.0.0.1:8080/'+dataObj.img_url" ></van-swipe-item>
+      <van-swipe-item><img class="img01" :src="'http://127.0.0.1:8080/'+dataObj.img_url2" ></van-swipe-item>
+    </van-swipe>
+    
+    <div><router-link to="/product"  class="return"></router-link></div>
     <div><router-link to="/home" class="gohome"></router-link></div>
     <div v-text="dataObj.lname" class="lname"></div>
     <span class="price">￥{{dataObj.price.toFixed(2)}}</span>
-    <!-- <img src="../../../assets/1329337423.jpg" style="background-color:#000"> -->
-
     
-    
-
     <mt-navbar v-model="selected">
       <mt-tab-item id="1">详情</mt-tab-item>
       <mt-tab-item id="2">评价</mt-tab-item>
@@ -22,6 +22,7 @@
             <div class="one"><img class="details1" :src="'http://127.0.0.1:8080/'+dataObj.details1"></div>
             <div class="two"><img class="details2" :src="'http://127.0.0.1:8080/'+dataObj.details2"></div>
           </div>
+          
         </mt-cell>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
@@ -41,7 +42,19 @@
   
     </mt-tab-container>
     
-    
+    <div class="bottom">
+      <div></div>
+      <div class="addcart">加入购物车</div>
+      <div class="buy">立即购买</div>
+    </div>
+
+    <van-goods-action>
+      <van-goods-action-icon icon="chat-o" text="客服" />
+      
+      <van-goods-action-icon icon="cart-o" text="购物车" :info="$store.getters.getCartCount" @click="tocart"/>  
+      <van-goods-action-button type="warning" text="加入购物车" @click="addcart" :data-lid="dataObj.lid" :data-price="dataObj.price" :data-lname="dataObj.lname"/>
+      <van-goods-action-button type="danger" text="立即购买" @click="tocart"/>
+    </van-goods-action>
     
   </div>
 </template>
@@ -51,12 +64,36 @@ export default {
   data() {
     return {
       dataObj: {},
-      lid: 0,
+      // lid: 0,
       selected: "1",
     };
   },
   props: ["lid"],
   methods: {
+    
+    addcart(e){
+      var lid=e.target.dataset.lid;
+      var n=e.target.dataset.lname;
+      var p=e.target.dataset.price;
+      var url = "addcart";
+      var obj = {lid:lid,lname:n,price:p};
+      this.axios.get(url,{params:obj})
+      .then(res=>{
+        if(res.data.code==-1){
+          this.$messagebox("消息","请先登录").then(res=>{
+            this.$router.push("/login");
+          });
+        }else if(res.data.code==-2){
+          this.$toast("添加失败");
+        }else{
+          this.$store.commit("increment");
+          this.$toast("添加成功");
+        }
+      })
+    },
+    tocart(){
+      this.$router.push("/cart")
+    },
     load() {
       (async () => {
         var result = await this.axios.get("http://localhost:8080/detail", {
@@ -80,7 +117,7 @@ export default {
 </script>
 
 <style scoped>
-.boss{background: #e3e2de}
+.boss{background: #e3e2de;position: relative;}
 .one{width:340px;display:block;}
 .two{width:340px;display:block;}
 .details1{
@@ -93,8 +130,19 @@ export default {
         display:block;
         float:left;
         background: url(../../../assets/toindex.png) no-repeat;
-        background-size:98%; 
+        background-size:100%; 
         width:370px;
+        height: 40px;
+        margin: 5px auto;
+    }
+  .return{
+        display:block;
+        position: fixed;
+        background: url(../../../assets/return.png) no-repeat;
+        z-index: 10;
+        top:5px;
+        left: 7px;
+        width:40px;
         height: 40px;
         margin: 5px auto;
     }
@@ -144,5 +192,12 @@ export default {
   border-radius:5px;
   background: #e3e2de;
   color:#000;
+}
+.bottom{
+  width:100%;
+  height:40px;
+  border:1px solid #000;
+  position:fixed;
+  bottom:0;
 }
 </style>

@@ -7,6 +7,7 @@ import Product from "./components/boutique/common/Product.vue"
 import Cart from "./components/boutique/common/Cart.vue"
 import Center from "./components/boutique/common/Center.vue"
 import Detail from "./components/boutique/common/Detail.vue"
+import Scroll from "./components/boutique/common/Scroll.vue"
 
 Vue.use(Router)
 export default new Router({
@@ -17,6 +18,7 @@ export default new Router({
     {path:'/product',component:Product},
     {path:'/center',component:Center},
     {path:'/cart',component:Cart},
+    {path:'/scroll',component:Scroll},
     {path:'/detail/:lid',component:Detail,props:true},
   ]
 })

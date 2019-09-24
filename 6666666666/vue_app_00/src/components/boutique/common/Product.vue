@@ -1,5 +1,6 @@
 <template>
   <div class="product-app">
+    <div><router-link to="/home"  class="return"></router-link></div>
     <div class="goods-item" v-for="(item,index) of list" :key="index">
       <router-link :to="'/detail/'+item.lid">
         <img :src="'http://127.0.0.1:8080/'+item.img_url" />
@@ -71,6 +72,17 @@ export default {
 </script>
 
 <style scoped>
+.return{
+        display:block;
+        position: fixed;
+        background: url(../../../assets/return.png) no-repeat;
+        z-index: 10;
+        top:7px;
+        left: 7px;
+        width:40px;
+        height: 40px;
+        margin: 5px auto;
+    }
 /*1:最外层父元素:弹性布局*/
 .product-app {
   display: flex; /*弹性布局*/
