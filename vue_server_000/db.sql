@@ -10,7 +10,7 @@ CREATE TABLE lg_login(
   uname VARCHAR(50),
   upwd  VARCHAR(32)
 );
-#功能二:添加二条测试数据 
+#功能二:添加2个用户    
 INSERT INTO lg_login VALUES(null,'tom',md5('123'));
 INSERT INTO lg_login VALUES(null,'jerry',md5('123'));
 

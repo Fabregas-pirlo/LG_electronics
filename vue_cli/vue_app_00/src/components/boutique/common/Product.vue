@@ -1,5 +1,6 @@
 <template>
   <div class="product-app">
+    
     <div><router-link to="/home"  class="return"></router-link></div>
     <div class="goods-item" v-for="(item,index) of list" :key="index">
       <router-link :to="'/detail/'+item.lid">
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       list: [],
-      pno: 0
+      pno: 0,
     };
   },
   created() {
@@ -102,10 +103,10 @@ export default {
   flex-direction: column; /*商品内容按列排放*/
   min-height: 229px; /*高度*/
 }
-/*3:修饰当前商品中图片 10:18*/
+/*3:修饰当前商品中图片*/
 .goods-item img {
   width: 100%;
-  height: 60%;
+  height: 180px;
 }
 /*4:修饰当前商品价格*/
 .goods-item .info {

@@ -5,10 +5,10 @@
       <van-swipe-item><img class="img01" :src="'http://127.0.0.1:8080/'+dataObj.img_url2" ></van-swipe-item>
     </van-swipe>
     
-    <div><router-link to="/product"  class="return"></router-link></div>
+    <div><router-link to="/home"  class="return"></router-link></div>
     <div><router-link to="/home" class="gohome"></router-link></div>
     <div v-text="dataObj.lname" class="lname"></div>
-    <span class="price">￥{{dataObj.price.toFixed(2)}}</span>
+    <span class="price" v-if="dataObj.price !== undefined">￥{{dataObj.price.toFixed(2)}}</span>
     
     <mt-navbar v-model="selected">
       <mt-tab-item id="1">详情</mt-tab-item>

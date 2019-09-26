@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div><router-link to="/center"  class="return"></router-link></div>
+        <div><router-link to="/home"  class="return"></router-link></div>
         <van-address-list
             v-model="chosenAddressId"
             :list="list"

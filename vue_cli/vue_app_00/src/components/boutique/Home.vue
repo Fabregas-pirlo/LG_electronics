@@ -160,9 +160,10 @@ export default {
       this.p4=result.data.data[3];
       this.p5=result.data.data[4];
       this.p6=result.data.data[5];
-      
-      
     })
+
+    // 获取跳转回来时vuex中的active
+    this.active = this.$store.state.active;
   },
   components: {
     tabbaricon: TabBarIcon,
@@ -195,6 +196,11 @@ export default {
       }else {
         this.goToCart = false;
       }
+      this.$store.commit('changeActive',this.active);
+      //切换选项卡时可回到顶端
+  　  //document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+     
     }
   }
 };

@@ -4,6 +4,13 @@
  </div>
 </template>
 
+<script>
+export default {
+   data(){
+      
+   }
+}
+</script>
 <style>
    .app-container{
      padding-top:0px;

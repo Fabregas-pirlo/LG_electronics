@@ -9,13 +9,14 @@
         <div class="cart-item" v-for="(item,index) of list" :key="index">
             <div class="leftText">
                 <!-- 用v-model和item的cb状态进行绑定 -->
-                <input type="checkbox" v-model="item.cb">
+                <input type="checkbox"  @click="singleChecked(index)" v-model="item.cb">
                 <div class="lname">{{item.lname}}</div>
                 <div class="price">￥{{(item.price*item.count).toFixed(2)}}</div>
             </div>
             <div @click="handler" class="counter">
                 <button :data-i="index" data-n="-1" :disabled="item.count==0" class="decrease">-</button>{{item.count}}
-                <button :data-i="index" data-n="1" class="increase">+</button>
+                <button :data-i="index" data-n="1" class="increase" :data-lid="item.lid" :data-price="item.price" 
+                :data-lname="item.lname" @click="addcart(e)">+</button>
             </div>
             
             <mt-button @click="delItem($event,index)" :data-id="item.id">删除</mt-button>
@@ -25,7 +26,7 @@
             <!-- <mt-button @click="delItems()">删除选中商品</mt-button> -->
             购物车商品数量：
             <span style="color:red">{{$store.getters.getCartCount}}</span>
-            总价：<span style="color:red">￥{{total.toFixed(2)}}</span>
+            总价：<span style="color:red" v-if="total !== undefined">￥{{total.toFixed(2)}}</span>
             <mt-button @click="delAll">清空购物车</mt-button>
         </div>
         <router-link to="/home" class="tocart">返回首页</router-link>
@@ -47,8 +48,8 @@ export default {
         this.loadMore();
     },
     
-    methods:{
-        //全选功能
+    methods:{ 
+       //全选功能
         handleChecked(item){
             if(this.allChecked==false){
                 for(var i=0;i<this.list.length;i++){
@@ -63,6 +64,24 @@ export default {
             }
             this.allChecked = !this.allChecked;
         },
+        //  singleChecked(i){
+
+        //           if(this.list[i].cb == false){
+        //                   this.list[i].cb = true
+        //           }else{
+        //               this.list[i].cb = false
+        //           }
+
+        //     var a = this.list.every((item,index,arr)=>{
+        //         console.log(item.cb)
+        //         return this.list[index].cb == true;
+        //     })
+        //     if(a){
+        //       this.allChecked = true
+        //     }else{
+        //         this.allChecked = false
+        //     }  
+        // },
         delAll(){
              this.$messagebox.confirm("是否删除商品")
             .then(res=>{
@@ -129,8 +148,8 @@ export default {
                         var n = this.list[i].count;
                         
                         this.$store.commit('reduce',n);
-                        
-                        this.loadMore();
+                        this.list.splice(i,1);
+                        //this.loadMore();
                     }
                 })   
             }).catch(err=>{});

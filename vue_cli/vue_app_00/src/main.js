@@ -32,6 +32,7 @@ Vue.use(Vuex)
 var store=new Vuex.Store({
   state:{
     cartCount:0,
+    active:'index'
   },
   mutations:{
     
@@ -47,6 +48,10 @@ var store=new Vuex.Store({
     // delItem(state,n) {
     //   state.cartCount -= n;
     // }
+    //返回时跳转路由不要跳到首页，而是跳到原先的页面
+    changeActive(state,val) {
+      state.active = val;
+    }
   },
   getters:{
     getCartCount(state){
