@@ -30,37 +30,37 @@
           <div class="recommend2"></div>
           <div class="goods">
               <router-link :to="'/detail/'+p1.lid" class="one"></router-link>
-              <div v-text="p1.lname"></div>
+              <div v-text="p1.lname" class="cname"></div>
               <span>￥{{p1.price.toFixed(2)}}</span>  
           </div>
 
           <div class="goods">
               <router-link :to="'/detail/'+p2.lid" class="two"></router-link>
-              <div v-text="p2.lname"></div>
+              <div v-text="p2.lname" class="cname"></div>
               <span>￥{{p2.price.toFixed(2)}}</span>  
           </div>
 
           <div class="goods">
               <router-link :to="'/detail/'+p3.lid" class="three"></router-link>
-              <div v-text="p3.lname"></div>
+              <div v-text="p3.lname" class="cname"></div>
               <span>￥{{p3.price.toFixed(2)}}</span>  
           </div>
 
           <div class="goods">
               <router-link :to="'/detail/'+p4.lid" class="four"></router-link>
-              <div>LG冰箱F448MC12B</div>
+              <div v-text="p4.lname" class="cname"></div>
               <span>￥{{p4.price.toFixed(2)}}</span>  
           </div>
 
           <div class="goods">
               <router-link :to="'/detail/'+p5.lid" class="five"></router-link>
-              <div>LG电视OLED55E9P</div>
+              <div v-text="p5.lname" class="cname"></div>
               <span>￥{{p5.price.toFixed(2)}}</span>  
           </div>
 
           <div class="goods">
               <router-link :to="'/detail/'+p6.lid" class="six"></router-link>
-              <div>LG电视OLED65W9PCA</div>
+              <div v-text="p6.lname" class="cname"></div>
               <span>￥{{p6.price.toFixed(2)}}</span>  
           </div>
           
@@ -207,6 +207,7 @@ export default {
 </script>
 
 <style scoped>
+  .cname{font-size:14px;text-align: center}
   .ciao{
     position: relative;
   }
@@ -257,9 +258,9 @@ export default {
   .search>input{
     position:relative;
     margin: 0 auto;
-    width:100%;
+    width:95%;
     height:26px;
-    border-radius: 10px;
+    border-radius: 15px;
     background: url(../../assets/zoom.png) no-repeat center left;
     background-size:6%; 
     padding-left:30px;

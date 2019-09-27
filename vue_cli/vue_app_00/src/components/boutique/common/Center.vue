@@ -1,20 +1,19 @@
 <template>
-    <div>
+    <div class="boss">
         <div class="crown">
             <div class="icon">
                 <img src="../../../assets/me3.png">
-                
             </div>
             <p class="asyn">匿名用户</p>
         </div>
         <div class="jifen">
             <div>
                 <p>0</p>
-                <p>积分</p>
+                <p class="yue">积分</p>
             </div>
             <div>
                 <p>￥0</p>
-                <p>余额</p>
+                <p class="yue">余额</p>
             </div>
         </div>
         <router-link to="/Cart" class="allorders"></router-link>
@@ -41,6 +40,7 @@
         
             
         <router-link to="/Cart" class="tocart"></router-link>
+        
         <router-link to="/address" class="addman"></router-link>
         
     </div>
@@ -53,17 +53,21 @@ export default {
 </script>
 
 <style scoped>
+    .yue{color:gray;font-size: 13px}
     .crown .asyn{
         position: absolute;
-        
-        top:71px;
-        left:60px;
+        color:gray;
+        top:78px;
+        left:67px;
+        font-size: 13px;
     }
     .crown{
-        width:200px;
+        
         display: flex;
         justify-content: space-between;
         margin-bottom:25px; 
+        width:400px;
+        height:85px;
     }
     
     .icon{
@@ -73,11 +77,7 @@ export default {
         top:20px;
         left:60px;
     }
-    .crown{
-        width:400px;
-        height:85px;
-        
-    }
+    
     .jifen{
         display:flex;
         justify-content: space-around;
